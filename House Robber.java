@@ -4,6 +4,8 @@
 
 //Given a list of non-negative integers representing the amount of money of each house, 
 //determine the maximum amount of money you can rob tonight without alerting the police.
+
+//Normal way
 public class Solution {
     public int rob(int[] nums) {
         int size = nums.length;
@@ -33,5 +35,24 @@ public class Solution {
         
         return sum;
 
+    }
+}
+// DP
+public class Solution {
+    public int rob(int[] nums) {
+        if(nums.length == 0||nums==null){
+            return 0;
+        }
+        
+        int[] temp = new int[nums.length+1];
+        
+        temp[0]= 0;
+        temp[1]= nums[0];
+        
+        for(int i=2;i<nums.length+1;i++){
+            temp[i] = Math.max(temp[i-1], temp[i-2]+nums[i-1]);
+        }
+        
+        return temp[nums.length];
     }
 }
